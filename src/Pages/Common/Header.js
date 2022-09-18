@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 import Button from "./Button";
+import CustomLink from "./CustomLink";
 
 const Header = () => {
   const [user] = useAuthState(auth);
@@ -12,8 +13,13 @@ const Header = () => {
   return (
     <div className="flex justify-between mx-32 py-2">
       <img src="" alt="logo" />
-      <nav>
-        <Link to="/">Home</Link>
+      <nav className="">
+        <span className="px-2">
+        <CustomLink to="/">Home</CustomLink>
+        </span>
+        <span className="px-2">
+        <CustomLink to="/blogs">Blogs</CustomLink>
+        </span>
         {user ? (
           <span
             onClick={() => {

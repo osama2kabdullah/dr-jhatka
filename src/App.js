@@ -7,6 +7,7 @@ import Login from "./Pages/Login/Login";
 import Footer from "./Pages/Common/Footer";
 import Checkout from "./Pages/Home/Services/Checkout";
 import RequirAuth from "./Pages/Common/RequirAuth";
+import Blogs from "./Pages/Blogs";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             </RequirAuth>
           }
         ></Route>
+        <Route path="/blogs" element={<Blogs></Blogs>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
