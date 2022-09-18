@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import {
+  useAuthState,
   useCreateUserWithEmailAndPassword,
   useSendEmailVerification,
   useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
+import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import AltLogin from "./AltLogin";
 
@@ -17,6 +19,14 @@ const Login = () => {
   const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
   const forgotBtn = () => {
     sendPasswordResetEmail(email);
+  }
+  
+  const [user] = useAuthState(auth);
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const navigate = useNavigate();
+  if (user) {
+    navigate(from, { replace: true });
   }
   
   //   register
