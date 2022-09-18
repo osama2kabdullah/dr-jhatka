@@ -1,39 +1,80 @@
 import React, { useState } from "react";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSendEmailVerification,
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 import AltLogin from "./AltLogin";
 
 const Login = () => {
   const [position, setPosition] = useState(true);
+
+  //reset email
+  const [email, setEmail] = useState('')
+  const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+  const forgotBtn = () => {
+    sendPasswordResetEmail(email);
+  }
+  
+  //   register
+  const [createUserWithEmailAndPassword] =
+    useCreateUserWithEmailAndPassword(auth);
+  // update profile
+  const [updateProfile] = useUpdateProfile(auth);
+  // email varification
+  const [sendEmailVerification] = useSendEmailVerification(auth);
+  //   sign in
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
+
+  const submitBtn = async (e) => {
+    e.preventDefault();
+    const email = e.target.email?.value;
+    const name = e.target.name?.value;
+    const password = e.target.password?.value;
+    const confPassword = e.target.confPassword?.value;
+
+    if (password === confPassword) {
+      await createUserWithEmailAndPassword(email, password);
+      await updateProfile({ displayName: name });
+      await sendEmailVerification(email);
+    }
+    await signInWithEmailAndPassword(email, password);
+  };
 
   return (
     <section class="h-screen">
       <div class="container py-12 h-full">
         <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
           <div class=" lg:w-5/12 w-10/12 lg:ml-20">
-            <form>
+            <form onSubmit={submitBtn}>
               {/* <!-- Email input --> */}
-              
-              {position || 
-              <>
+
+              {position || (
+                <>
+                  <div class="mb-6">
+                    <input
+                      type="text"
+                      class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      placeholder="Full name"
+                      name="name"
+                    />
+                  </div>
+                </>
+              )}
+
               <div class="mb-6">
                 <input
-                  type="text"
-                  class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Full name"
-                  name="name"
-                />
-              </div>
-              </>
-              }
-              
-              <div class="mb-6">
-                <input
+                onChange={(e)=>setEmail(e.target.value)}
                   type="email"
                   class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Email"
                   name="email"
                 />
               </div>
-              
+
               {/* <!-- Password input --> */}
               <div class="mb-6">
                 <input
@@ -43,25 +84,24 @@ const Login = () => {
                   name="password"
                 />
               </div>
-              {
-                position ||
+              {position || (
                 <div class="mb-6">
-                <input
-                  type="password"
-                  class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Confirm Password"
-                  name="confPassword"
-                />
-              </div>
-              }
+                  <input
+                    type="password"
+                    class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Confirm Password"
+                    name="confPassword"
+                  />
+                </div>
+              )}
 
               <div class="flex justify-end items-center mb-6">
-                <a
-                  href="#!"
-                  class="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
+                <span
+                  onClick={forgotBtn}
+                  class="text-blue-600 cursor-pointer hover:underline hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
                 >
                   {position && "Forgot password?"}
-                </a>
+                </span>
               </div>
 
               {/* <!-- Submit button --> */}
