@@ -20,6 +20,9 @@ const Header = () => {
         <span className="px-2">
         <CustomLink to="/blogs">Blogs</CustomLink>
         </span>
+        <span className="px-2">
+        <CustomLink to="/aboutme">About me</CustomLink>
+        </span>
         {user ? (
           <span
             onClick={() => {

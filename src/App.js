@@ -8,6 +8,8 @@ import Footer from "./Pages/Common/Footer";
 import Checkout from "./Pages/Home/Services/Checkout";
 import RequirAuth from "./Pages/Common/RequirAuth";
 import Blogs from "./Pages/Blogs";
+import About from "./Pages/About";
+import NotFound from "./Pages/NotFound";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           }
         ></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
+        <Route path="/aboutme" element={<About></About>}></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
