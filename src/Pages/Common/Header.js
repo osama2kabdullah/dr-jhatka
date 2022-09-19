@@ -11,7 +11,7 @@ const Header = () => {
   console.log(user);
 
   return (
-    <div className="flex justify-between mx-32 py-2">
+    <div className="flex justify-between sm:mx-32 mx-3 py-2">
       <img src="" alt="logo" />
       <nav className="">
         <span className="px-2">
