@@ -3,10 +3,10 @@ import images_5 from "../images/images_5.jpg";
 
 const About = () => {
     return (
-        <div className='px-16 about-page h-screen grid gap-12 py-12'>
+        <div className='sm:px-16 px-5 about-page h-screen grid gap-2 sm:gap-12 py-12'>
             <div className='p-3 rounded-2xl bg-gray-200'>
                 <img className='rounded-full' src={images_5} alt="" />
-                <h2 className='text-4xl font-bold'>Osama Abdullah</h2>
+                <h2 className='sm:text-4xl font-bold'>Osama Abdullah</h2>
             </div>
             <div>
                 <h1 className='text-4xl font-bold'>What I achive in next 6 month</h1>
