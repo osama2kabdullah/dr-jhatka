@@ -1,4 +1,4 @@
-# Dr. Jhatka 
+# Dr. Jhatka ([Live site](https://dr-jhatka.web.app/))
 
 ### Feature and Functionality
 ***
@@ -13,3 +13,4 @@
 * firebase for authenticetion.
 * react-firebase-hook use for firebase authentication.
 * react router for route page to page that make this a single page application.
+* firebase hosting for host site
