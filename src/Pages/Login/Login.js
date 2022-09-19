@@ -7,8 +7,10 @@ import {
   useSignInWithEmailAndPassword,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
+import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import HelmetTitle from "../Common/HelmetTitle";
 import AltLogin from "./AltLogin";
 
 const Login = () => {
@@ -56,6 +58,7 @@ const Login = () => {
 
   return (
     <section class="h-screen">
+      <HelmetTitle>{position ? 'Login':'Register'}</HelmetTitle>
       <div class="container py-12 h-full">
         <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
           <div class=" lg:w-5/12 w-10/12 lg:ml-20">

@@ -1,8 +1,10 @@
 import React from 'react';
+import HelmetTitle from './Common/HelmetTitle';
 
 const Blogs = () => {
     return (
         <div className='grid gap-6 mx-16 my-4'>
+            <HelmetTitle>Blogs</HelmetTitle>
             <h1 className='text-4xl text-center'>Answering 3 qoustion</h1>
             <div className='p-3 rounded-2xl bg-sky-200'>
                 <h1 className='sm:text-3xl text-md font-bold'>Difference between authorization and authentication</h1>
